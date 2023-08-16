@@ -1,7 +1,7 @@
 
 <template>
     <div class="wrapper">
-    <ExpenseIncomestat/>
+    <ExpenseIncomestat :income="getIncome" :expense="getExpense" />
     <ExpenseHistory  @remove-expense="removeExpenses" :expenses="expenses"/>
     <ExpenseForm @new-expense="handleNewExpense" :expenses="expenses"/>
 </div>
@@ -25,10 +25,19 @@ export default{
             this.expenses.push(newExpense);
         },
         removeExpenses(expenseId){
-            alert(expenseId)
             this.expenses = this.expenses.filter(item => item.id !== expenseId)
         }
         
+    },
+    computed: {
+        getIncome() {
+            let income = this.expenses.filter(item => item.price > 0)
+            return income.reduce((a,c) => a + c.price,0)
+        },
+        getExpense() {
+            let expense = this.expenses.filter(item => item.price < 0)
+            return expense.reduce((a,c) => a + c.price,0)
+     }
     },
     components:{
         ExpenseForm,
