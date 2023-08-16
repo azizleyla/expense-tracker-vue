@@ -11,7 +11,7 @@
     <input v-model="price" type="number" placeholder="Enter price"/>
 
 </div>
-<button type="submit">Add Transaction</button>
+<button class="add-btn" type="submit">Add Transaction</button>
  </form>
 </div>
 
@@ -68,7 +68,7 @@ input{
     margin-top: 5px;
 }
 
-button{
+.add-btn{
     background-color: purple;
     color:white;
     width: 100%;

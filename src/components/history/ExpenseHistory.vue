@@ -1,9 +1,13 @@
 <template>
 <ul >
+
 <li v-for="({title,price,id}) in expenses" :key="id">{{ title }}
 <span>{{ price }}$</span>
 <button @click="removeExpense(id)">Remove</button>
+
 </li>
+
+
 
 </ul>
 </template>
@@ -13,6 +17,7 @@ export default{
     props:{
         expenses:Array
     },
+    
     methods:{
         removeExpense(id){
             
@@ -29,6 +34,7 @@ export default{
     display: flex;
     justify-content:space-between;
     padding: 10px;
-    margin-bottom: 20px;
+     width: 100%;
  }
+
 </style>
