@@ -13,7 +13,7 @@
 
 <script>
 export default {
-    name: "ExpenseIncomestat",
+    name: "ExpenseIncomeStat",
     props: ['income','expense']
 }
 </script>

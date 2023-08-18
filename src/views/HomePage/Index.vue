@@ -1,15 +1,14 @@
 
 <template>
     <div class="wrapper">
-    <ExpenseIncomestat :income="getIncome" :expense="getExpense" />
-    <ExpenseHistory  @remove-expense="removeExpenses" :expenses="expenses"/>
-    <ExpenseForm @new-expense="handleNewExpense" :expenses="expenses"/>
+    <expense-income-stat :income="getIncome" :expense="getExpense" />
+    <expense-history  @remove-expense="removeExpenses" :expenses="expenses"/>
+    <expense-form @new-expense="handleNewExpense" :expenses="expenses"/>
 </div>
 </template>
-
 <script>
 import ExpenseForm from "@/components/forms/ExpenseForm.vue";
-import ExpenseIncomestat from "@/components/stats/ExpenseIncomestat.vue";
+import ExpenseIncomeStat from "@/components/stats/ExpenseIncomeStat.vue";
 import ExpenseHistory from "@/components/history/ExpenseHistory.vue"
 
 export default{
@@ -17,15 +16,17 @@ export default{
     
     data(){
         return{
-            expenses:[{title:"Expense1",price:500}]
+            expenses:JSON.parse(sessionStorage.getItem('expenses')) || []
         }
     },
     methods: {
         handleNewExpense(newExpense) {
             this.expenses.push(newExpense);
+            sessionStorage.setItem('expenses',JSON.stringify(this.expenses))
         },
         removeExpenses(expenseId){
-            this.expenses = this.expenses.filter(item => item.id !== expenseId)
+            this.expenses = this.expenses.filter(item => item.id !== expenseId);
+            sessionStorage.setItem('expenses',JSON.stringify(this.expenses));
         }
         
     },
@@ -41,7 +42,7 @@ export default{
     },
     components:{
         ExpenseForm,
-        ExpenseIncomestat,
+        ExpenseIncomeStat,
         ExpenseHistory
     }
 }
